@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Message</title>
+  <title>Season</title>
 
   <style>
     body {
@@ -61,6 +61,10 @@
       font-size:14px;
       opacity:0.7;
     }
+
+    iframe {
+      display:none;
+    }
   </style>
 </head>
 
@@ -81,7 +85,6 @@
   </div>
 </div>
 
-<!-- YouTube Embed -->
 <iframe id="ytMusic" width="0" height="0" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
 <script>
@@ -95,22 +98,18 @@ function getYoutubeId(url) {
   return id;
 }
 
+const youtubeLink = "https://youtu.be/CnVVjLOGVoY?si=jBOD2JrLzSdpwLv7";
+const videoId = getYoutubeId(youtubeLink);
+
+const iframe = document.getElementById("ytMusic");
+iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&mute=1`;
+
 function openMessage() {
   document.querySelector('.open-btn').style.display = 'none';
   document.getElementById('content').style.display = 'block';
 
-  const youtubeLink = "https://youtu.be/CnVVjLOGVoY?si=jBOD2JrLzSdpwLv7";
-  const videoId = getYoutubeId(youtubeLink);
-  const iframe = document.getElementById("ytMusic");
-
-  iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1`;
+  iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&mute=0`;
 }
-
-window.onload = function() {
-  const youtubeLink = "https://youtu.be/CnVVjLOGVoY?si=jBOD2JrLzSdpwLv7";
-  const videoId = getYoutubeId(youtubeLink);
-  document.getElementById("ytMusic").src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1`;
-};
 </script>
 
 </body>
