@@ -54,15 +54,23 @@
     .open-btn:hover {
       transform: scale(1.05);
     }
+
+    .notice {
+      text-align:center;
+      margin-bottom:10px;
+      font-size:14px;
+      opacity:0.7;
+    }
   </style>
 </head>
+
 <body>
 
 <button class="open-btn" onclick="openMessage()">Pencet Pesan</button>
 
 <div class="container" id="content">
   <div class="card">
-    <div style="text-align:center; margin-bottom:10px; font-size:14px; opacity:0.7;">
+    <div class="notice">
       boleh ga ya baca sampe akhir?
     </div>
     hey, sorry for bothering ur time dan maaf kalau ini agak random. sebenarnya kita juga baru kenal sekitar satu bulan terakhir. awalnya aku cuma mau sekadar temenan aja, but as time goes on, i think i really like u, not just because u’re beautiful but because of ur personality, the way you think, the way you reply to my messages in our chat bubbles, and honestly, everything about u.
@@ -73,22 +81,36 @@
   </div>
 </div>
 
-<audio id="bgMusic" loop>
-  <!-- Masukkan link MP3 atau file lagu -->
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
+<!-- YouTube Embed -->
+<iframe id="ytMusic" width="0" height="0" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
 <script>
-function openMessage() {
-  // sembunyikan tombol
-  document.querySelector('.open-btn').style.display = 'none';
-  // tampilkan pesan
-  document.getElementById('content').style.display = 'block';
-  
-  const audio = document.getElementById("bgMusic");
-  audio.volume = 0.5;
-  audio.play().catch(err => console.log("Audio play error:", err));
+function getYoutubeId(url) {
+  let id = "";
+  if (url.includes("youtu.be/")) {
+    id = url.split("youtu.be/")[1].split("?")[0];
+  } else if (url.includes("v=")) {
+    id = url.split("v=")[1].split("&")[0];
+  }
+  return id;
 }
+
+function openMessage() {
+  document.querySelector('.open-btn').style.display = 'none';
+  document.getElementById('content').style.display = 'block';
+
+  const youtubeLink = "https://youtu.be/CnVVjLOGVoY?si=jBOD2JrLzSdpwLv7";
+  const videoId = getYoutubeId(youtubeLink);
+  const iframe = document.getElementById("ytMusic");
+
+  iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1`;
+}
+
+window.onload = function() {
+  const youtubeLink = "https://youtu.be/CnVVjLOGVoY?si=jBOD2JrLzSdpwLv7";
+  const videoId = getYoutubeId(youtubeLink);
+  document.getElementById("ytMusic").src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1`;
+};
 </script>
 
 </body>
