@@ -32,7 +32,6 @@
       line-height: 1.8;
       box-shadow: 0 5px 15px rgba(0,0,0,0.15);
       animation: fadeIn 1.2s ease;
-
       max-height: 80vh;
       overflow-y: auto;
     }
@@ -59,7 +58,7 @@
 </head>
 <body>
 
-<button class="open-btn" onclick="openMessage()"> Pencet Pesan</button>
+<button class="open-btn" onclick="openMessage()">💌 Pencet Pesan</button>
 
 <div class="container" id="content">
   <div class="card">
@@ -74,28 +73,21 @@
   </div>
 </div>
 
-<iframe id="ytMusic" width="0" height="0" allow="autoplay; encrypted-media"></iframe>
+<audio id="bgMusic" loop>
+  <!-- Masukkan link MP3 atau file lagu -->
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-function getYoutubeId(url) {
-  let id = "";
-  if (url.includes("youtu.be/")) {
-    id = url.split("youtu.be/")[1].split("?")[0];
-  } else if (url.includes("v=")) {
-    id = url.split("v=")[1].split("&")[0];
-  }
-  return id;
-}
-
 function openMessage() {
+  // sembunyikan tombol
   document.querySelector('.open-btn').style.display = 'none';
+  // tampilkan pesan
   document.getElementById('content').style.display = 'block';
-
-  const youtubeLink = "https://youtu.be/CnVVjLOGVoY?si=GPq4Kz0Vpzr9FlsL";
-  const videoId = getYoutubeId(youtubeLink);
-  const iframe = document.getElementById("ytMusic");
-
-  iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&mute=0`;
+  
+  const audio = document.getElementById("bgMusic");
+  audio.volume = 0.5;
+  audio.play().catch(err => console.log("Audio play error:", err));
 }
 </script>
 
